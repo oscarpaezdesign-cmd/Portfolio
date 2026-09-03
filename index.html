@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oscar Páez — Concept Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EDEEE8;
+    --paper-2: #F6F6F1;
+    --ink: #16181B;
+    --ink-soft: #565B57;
+    --line: #CBCDC3;
+    --accent: #A9622F;
+    --accent-soft: #F1E3D6;
+    --radius: 3px;
+    --max: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,h2,h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  img{ display:block; max-width:100%; }
+
+  .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- NAV ---------- */
+  header.top{
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(237,238,232,0.9);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar{
+    display:flex; align-items:center; justify-content: space-between;
+    padding: 18px 32px;
+    max-width: var(--max); margin: 0 auto;
+  }
+  .topbar .name{ font-family:'Fraunces', serif; font-size: 19px; }
+  .topbar nav{ display:flex; align-items:center; gap: 28px; font-size: 14px; }
+  .topbar nav a{ text-decoration:none; color: var(--ink-soft); border-bottom: 1px solid transparent; padding-bottom:2px; }
+  .topbar nav a:hover, .topbar nav a.active{ color: var(--ink); border-color: var(--ink); }
+  .topbar nav a.cta{ color: var(--ink); }
+  @media (max-width: 640px){ .topbar nav a:not(.cta){ display:none; } }
+
+  .lang-switch{ display:flex; border: 1px solid var(--line); border-radius: 20px; overflow:hidden; }
+  .lang-switch button{
+    font-family:'Work Sans'; font-size: 12.5px; font-weight:500; letter-spacing: .02em;
+    padding: 6px 13px; background: transparent; border:none; cursor:pointer; color: var(--ink-soft);
+  }
+  .lang-switch button.active{ background: var(--ink); color: var(--paper); }
+
+  /* ---------- HERO ---------- */
+  .hero{ border-bottom: 1px solid var(--line); }
+  .hero-grid{
+    display:grid; grid-template-columns: 1fr 0.9fr; align-items:stretch;
+  }
+  .hero-text{ padding: 92px 48px 76px 32px; display:flex; flex-direction:column; justify-content:center; }
+  .hero h1{
+    font-size: clamp(34px, 4.2vw, 54px);
+    line-height: 1.08;
+    max-width: 17ch;
+  }
+  .hero .role{
+    margin-top: 22px; color: var(--ink-soft); font-size: 17px; max-width: 44ch;
+  }
+  .hero-meta{
+    display:flex; gap: 28px; margin-top: 36px; padding-top:24px; border-top: 1px solid var(--line);
+    font-size: 13.5px; color: var(--ink-soft); flex-wrap: wrap;
+  }
+  .hero-meta strong{ color: var(--ink); font-weight: 500; display:block; font-family:'Fraunces', serif; font-size: 15.5px; margin-bottom:2px;}
+  .hero-image{ position:relative; overflow:hidden; min-height: 420px; }
+  .hero-image img{ width:100%; height:100%; object-fit: cover; }
+  @media (max-width: 860px){
+    .hero-grid{ grid-template-columns: 1fr; }
+    .hero-text{ padding: 56px 24px 40px; }
+    .hero-image{ min-height: 300px; order: -1; }
+  }
+
+  /* ---------- DISCLAIMER ---------- */
+  .disclaimer{ padding: 30px 0; border-bottom: 1px solid var(--line); background: var(--paper-2); }
+  .disclaimer .box{ border-left: 2px solid var(--accent); padding: 4px 0 4px 20px; }
+  .disclaimer .box .d-title{ font-size: 12.5px; text-transform: none; color: var(--ink); font-weight: 600; margin-bottom: 6px; }
+  .disclaimer .box p{ margin:0; font-size: 13.5px; color: var(--ink-soft); max-width: 76ch; }
+  .disclaimer .box a{ color: var(--ink); border-bottom: 1px solid var(--ink-soft); text-decoration:none; }
+
+  /* ---------- INDEX OF WORK ---------- */
+  .index{ padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
+  .index-title{ font-size: 13px; color: var(--ink-soft); margin-bottom: 22px; }
+  .index-list{ list-style:none; margin:0; padding:0; }
+  .index-list li{
+    display:grid; grid-template-columns: 48px 1fr auto; gap: 20px; align-items:baseline;
+    padding: 18px 0; border-top: 1px solid var(--line);
+  }
+  .index-list li:last-child{ border-bottom: 1px solid var(--line); }
+  .index-list a{ text-decoration:none; display:contents; }
+  .index-num{ font-family:'Fraunces', serif; color: var(--ink-soft); font-size:15px; }
+  .index-name{ font-family:'Fraunces', serif; font-size: clamp(20px,3vw,28px); transition: color .15s ease; }
+  .index-tag{ font-size: 13px; color: var(--ink-soft); white-space:nowrap; }
+  .index-list li:hover .index-name{ color: var(--accent); }
+
+  /* ---------- CASE STUDIES ---------- */
+  .case{ padding: 96px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 80px; }
+  .case:nth-child(even){ background: var(--paper-2); }
+  .case-head{
+    display:grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 48px;
+  }
+  .case-num{ font-family:'Fraunces', serif; font-size: 14px; color: var(--ink-soft); margin-bottom: 14px; }
+  .case-head h2{ font-size: clamp(28px, 3.6vw, 42px); line-height:1.1; max-width: 16ch; }
+  .case-summary{ color: var(--ink-soft); font-size: 15.5px; align-self:end; max-width: 42ch; }
+  .facts{
+    display:grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  }
+  .facts div{ padding: 16px 20px; border-left: 1px solid var(--line); }
+  .facts div:first-child{ border-left:none; padding-left:0; }
+  .facts .flabel{ font-size: 12px; color: var(--ink-soft); margin-bottom: 6px; }
+  .facts .fvalue{ font-family:'Fraunces', serif; font-size: 15.5px; }
+  .fab-note{ font-size: 12.5px; color: var(--ink-soft); padding: 10px 0 40px; }
+  .fab-note a{ color: var(--ink-soft); }
+  @media (max-width: 780px){
+    .case-head{ grid-template-columns:1fr; gap:20px; }
+    .facts{ grid-template-columns: 1fr 1fr; }
+    .facts div{ border-left:none; border-top: 1px solid var(--line); }
+    .facts div:nth-child(-n+2){ border-top:none; }
+  }
+
+  .visual{
+    display:grid; grid-template-columns: 1.5fr 1fr; gap: 10px;
+    margin-bottom: 52px;
+  }
+  .visual .v-main{ aspect-ratio: 4/3; border: 1px solid var(--line); border-radius: var(--radius); overflow:hidden; background:#fff; }
+  .visual .v-side{ aspect-ratio: 4/3; border: 1px solid var(--line); border-radius: var(--radius); overflow:hidden; background:#fff; }
+  .visual img{ width:100%; height:100%; object-fit: cover; }
+  @media (max-width: 700px){ .visual{ grid-template-columns: 1fr; } }
+
+  .case-body{ display:grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .case-body h3{ font-size: 16px; margin-bottom: 10px; }
+  .case-body p{ color: var(--ink-soft); font-size: 15px; margin: 0 0 20px; }
+  @media (max-width: 780px){ .case-body{ grid-template-columns:1fr; gap:8px; } }
+
+  /* ---------- MORE WORK STRIP ---------- */
+  .more{ padding: 90px 0; border-bottom: 1px solid var(--line); }
+  .more-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:36px; flex-wrap:wrap; }
+  .more-head h2{ font-size: clamp(24px,3.2vw,34px); max-width: 14ch; }
+  .more-head p{ color: var(--ink-soft); font-size: 15px; max-width: 46ch; margin:0; }
+  .more-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .more-grid figure{ margin:0; aspect-ratio: 3/4; overflow:hidden; border-radius: var(--radius); border: 1px solid var(--line); }
+  .more-grid img{ width:100%; height:100%; object-fit:cover; }
+  @media (max-width: 780px){ .more-grid{ grid-template-columns: repeat(2, 1fr); } }
+
+  /* ---------- ABOUT / PROCESS ---------- */
+  .about{ padding: 90px 0; border-bottom: 1px solid var(--line); }
+  .about-grid{ display:grid; grid-template-columns: 1fr 1.3fr; gap: 64px; }
+  .about h2{ font-size: clamp(26px,3.4vw,36px); max-width: 12ch; }
+  .about-text p{ font-size: 16px; color: var(--ink-soft); max-width: 60ch; margin: 0 0 16px; }
+  .principles{ margin-top: 28px; display:grid; gap: 18px; }
+  .principle{ display:grid; grid-template-columns: 28px 1fr; gap:14px; border-top:1px solid var(--line); padding-top:16px; }
+  .principle .p-num{ font-family:'Fraunces', serif; color: var(--ink-soft); font-size:14px; }
+  .principle h4{ font-family:'Work Sans'; font-weight:600; font-size:14.5px; margin:0 0 4px; }
+  .principle p{ font-size: 14px; color: var(--ink-soft); margin:0; }
+  @media (max-width: 780px){ .about-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- CONTACT ---------- */
+  .contact{ padding: 96px 0 80px; }
+  .contact-grid{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap: 32px; }
+  .contact h2{ font-size: clamp(30px,4.6vw,50px); max-width: 13ch; }
+  .contact-links{ display:flex; flex-direction:column; gap:10px; font-size:15px; }
+  .contact-links a{ text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:2px; }
+  .contact-links a:hover{ border-color: var(--accent); color: var(--accent); }
+  .wrap.footwrap{ display:flex; justify-content:space-between; border-top:1px solid var(--line); padding: 20px 32px; font-size:13px; color: var(--ink-soft); max-width:var(--max); margin:0 auto; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="topbar">
+    <div class="name">Oscar Páez</div>
+    <nav id="mainnav">
+      <a href="#trabajo" data-i18n="nav_work">Work</a>
+      <a href="#sobre-mi" data-i18n="nav_approach">Approach</a>
+      <a href="#contacto" class="cta" data-i18n="nav_contact">Contact</a>
+      <div class="lang-switch">
+        <button id="lang-en" class="active" type="button">EN</button>
+        <button id="lang-es" type="button">ES</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <h1 data-i18n="hero_h1">Design is about giving form to ideas.</h1>
+      <p class="role" data-i18n="hero_role">Senior concept designer with 15+ years bridging architectural vision and fabrication — custom ironwork, furniture, lighting, and brand design, built from a single reference photo through to production-ready drawings.</p>
+      <div class="hero-meta">
+        <div><strong data-i18n="hero_meta1_label">Based in</strong><span data-i18n="hero_meta1_value">Bogotá, Colombia — remote worldwide</span></div>
+        <div><strong data-i18n="hero_meta2_label">Track record</strong><span data-i18n="hero_meta2_value">8 years leading concept design for a U.S. metalwork studio</span></div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/staircase-hero.jpg" alt="Custom ornamental double staircase railing, concept to installation">
+    </div>
+  </div>
+</section>
+
+<section class="disclaimer">
+  <div class="wrap">
+    <div class="box">
+      <div class="d-title" data-i18n="disclaimer_title">A note on the metalwork projects</div>
+      <p data-i18n="disclaimer_text">All architectural ironwork projects shown here were developed as concept design work for Artesano Iron Works (artesanoironworks.com). My role was limited to concept design, drafting, and visual proposals — fabrication, engineering execution, and production are proprietary to Artesano Iron Works.</p>
+    </div>
+  </div>
+</section>
+
+<section class="index" id="trabajo">
+  <div class="wrap">
+    <div class="index-title" data-i18n="index_title">Selected work</div>
+    <ul class="index-list">
+      <li><a href="#caso-escalera"><span class="index-num">01</span><span class="index-name" data-i18n="case1_name">Circular railing for a grand double staircase</span><span class="index-tag" data-i18n="case1_tag">Residential · 2023</span></a></li>
+      <li><a href="#caso-bronce"><span class="index-num">02</span><span class="index-name" data-i18n="case2_name">Symphony in Bronze</span><span class="index-tag" data-i18n="case2_tag">Residential · 2023</span></a></li>
+      <li><a href="#caso-puerta"><span class="index-num">03</span><span class="index-name" data-i18n="case3_name">22-foot ironwork entry system</span><span class="index-tag" data-i18n="case3_tag">Residential · 2024</span></a></li>
+      <li><a href="#caso-corten"><span class="index-num">04</span><span class="index-name" data-i18n="case4_name">Corten steel architectural water feature</span><span class="index-tag" data-i18n="case4_tag">Commercial · 2022</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- CASE 01 -->
+<article class="case" id="caso-escalera">
+  <div class="wrap">
+    <div class="case-head">
+      <div>
+        <div class="case-num">01 / 04</div>
+        <h2 data-i18n="case1_title">Circular railing for a grand double staircase</h2>
+      </div>
+      <p class="case-summary" data-i18n="case1_summary">A custom ornamental steel railing system for a high-end residential double staircase, built from a single reference photo — precision layout across angled stair runs, intermediate landings, and curved balcony panels.</p>
+    </div>
+
+    <div class="facts">
+      <div><div class="flabel" data-i18n="fact_role_label">Role</div><div class="fvalue" data-i18n="fact_role_value">Lead concept design</div></div>
+      <div><div class="flabel" data-i18n="fact_scope_label">Scope</div><div class="fvalue" data-i18n="fact_scope_value">Concept design</div></div>
+      <div><div class="flabel" data-i18n="fact_materials_label">Materials</div><div class="fvalue" data-i18n="case1_materials">Steel</div></div>
+      <div><div class="flabel" data-i18n="fact_year_label">Year</div><div class="fvalue">2023</div></div>
+    </div>
+    <div class="fab-note" data-i18n="fab_note">Concept design by Oscar Páez · Fabrication: Artesano Iron Works</div>
+
+    <div class="visual">
+      <div class="v-main"><img src="images/staircase-hero.jpg" alt="Grand double staircase with ornamental steel scrollwork railing"></div>
+      <div class="v-side"><img src="images/staircase-detail1.jpg" alt="Close detail of scrollwork railing panel"></div>
+    </div>
+
+    <div class="case-body">
+      <div>
+        <h3 data-i18n="h_challenge">The challenge</h3>
+        <p data-i18n="case1_challenge">The only starting point was a single reference image. From it, the project had to interpret the existing architecture and translate intricate decorative ironwork into precise production drawings — adapting the scrollwork to the staircase's own geometry, a 32.5° diagonal run, so the pattern's rhythm stayed intact across the flat landings.</p>
+      </div>
+      <div>
+        <h3 data-i18n="h_did">What I did</h3>
+        <p data-i18n="case1_did">Developed the full concept package: layout drawings for the angled runs and landings, scrollwork distribution calculated to the staircase's exact slope, and horizontal balcony panels that carry the same pattern language around the curve — balancing classical detail with the structural standards the fabrication team needed to build from.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- CASE 02 -->
+<article class="case" id="caso-bronce">
+  <div class="wrap">
+    <div class="case-head">
+      <div>
+        <div class="case-num">02 / 04</div>
+        <h2 data-i18n="case2_title">Symphony in Bronze</h2>
+      </div>
+      <p class="case-summary" data-i18n="case2_summary">A helical staircase railing in cast bronze, built around a tight 11'-7" curvature — over 20 individually cast ornamental details, from acanthus motifs to scroll flowers, set against warm mahogany paneling.</p>
+    </div>
+
+    <div class="facts">
+      <div><div class="flabel" data-i18n="fact_role_label">Role</div><div class="fvalue" data-i18n="fact_role_value">Lead concept design</div></div>
+      <div><div class="flabel" data-i18n="fact_scope_label">Scope</div><div class="fvalue" data-i18n="fact_scope_value">Concept design</div></div>
+      <div><div class="flabel" data-i18n="fact_materials_label">Materials</div><div class="fvalue" data-i18n="case2_materials">Cast bronze</div></div>
+      <div><div class="flabel" data-i18n="fact_year_label">Year</div><div class="fvalue">2023</div></div>
+    </div>
+    <div class="fab-note" data-i18n="fab_note">Concept design by Oscar Páez · Fabrication: Artesano Iron Works</div>
+
+    <div class="visual">
+      <div class="v-main"><img src="images/bronze-hero.jpg" alt="Curved cast bronze staircase railing with scroll and acanthus motifs"></div>
+      <div class="v-side"><img src="images/bronze-detail.jpg" alt="Detail of cast bronze scroll ornament and lighting fixture"></div>
+    </div>
+
+    <div class="case-body">
+      <div>
+        <h3 data-i18n="h_challenge">The challenge</h3>
+        <p data-i18n="case2_challenge">Translating neoclassical ornamentation into a multi-plane, helical structure meant developing an unfolded spiral geometry while keeping every scroll, cast leaf, and floral accent in absolute symmetry along a curve that left almost no room for error. More than 20 design revisions were needed to hold that tolerance.</p>
+      </div>
+      <div>
+        <h3 data-i18n="h_did">What I did</h3>
+        <p data-i18n="case2_did">Bridged concept and fabrication directly — converting the architectural constraints into precise 2D and 3D shop drawings for the spiral and the flat balcony runs, and specifying every custom-cast bronze component so it would align exactly with the mounting hardware and the existing woodwork on site.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- CASE 03 -->
+<article class="case" id="caso-puerta">
+  <div class="wrap">
+    <div class="case-head">
+      <div>
+        <div class="case-num">03 / 04</div>
+        <h2 data-i18n="case3_title">22-foot ironwork entry system</h2>
+      </div>
+      <p class="case-summary" data-i18n="case3_summary">A monumental entry door and curved transom window wall, conceptualized to anchor a residential facade — organic scrollwork carried across three tiers, engineered to hold oversized insulated glass at full height.</p>
+    </div>
+
+    <div class="facts">
+      <div><div class="flabel" data-i18n="fact_role_label">Role</div><div class="fvalue" data-i18n="fact_role_value">Lead concept design</div></div>
+      <div><div class="flabel" data-i18n="fact_scope_label">Scope</div><div class="fvalue" data-i18n="fact_scope_value">Concept design</div></div>
+      <div><div class="flabel" data-i18n="fact_materials_label">Materials</div><div class="fvalue" data-i18n="case3_materials">Steel &amp; insulated glass</div></div>
+      <div><div class="flabel" data-i18n="fact_year_label">Year</div><div class="fvalue">2024</div></div>
+    </div>
+    <div class="fab-note" data-i18n="fab_note">Concept design by Oscar Páez · Fabrication: Artesano Iron Works</div>
+
+    <div class="visual">
+      <div class="v-main"><img src="images/entrydoor-hero.jpg" alt="22-foot tall custom entry door with curved transom and scrollwork"></div>
+      <div class="v-side"><img src="images/entrydoor-detail.jpg" alt="Full-height view of the ironwork entry system from outside"></div>
+    </div>
+
+    <div class="case-body">
+      <div>
+        <h3 data-i18n="h_challenge">The challenge</h3>
+        <p data-i18n="case3_challenge">At nearly 22 feet tall, the system needed to balance a massive vertical volume with delicate scrollwork without losing structural rhythm — dividing the facade into three proportional tiers so the entryway still reads at human scale while drawing the eye up through the glass.</p>
+      </div>
+      <div>
+        <h3 data-i18n="h_did">What I did</h3>
+        <p data-i18n="case3_did">Explored four distinct design proposals for the tiering and transom curves, then produced complete CAD documentation — scroll geometries, structural tube framing, and custom glass-retention profiles engineered specifically for the oversized insulated units each tier had to carry.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- CASE 04 -->
+<article class="case" id="caso-corten">
+  <div class="wrap">
+    <div class="case-head">
+      <div>
+        <div class="case-num">04 / 04</div>
+        <h2 data-i18n="case4_title">Corten steel architectural water feature</h2>
+      </div>
+      <p class="case-summary" data-i18n="case4_summary">A monolithic water wall for a corporate headquarters garden, exploring the rich patina and organic durability of Corten steel — a louvered facade engineered to carry a continuous, even sheet of water.</p>
+    </div>
+
+    <div class="facts">
+      <div><div class="flabel" data-i18n="fact_role_label">Role</div><div class="fvalue" data-i18n="fact_role_value">Lead concept design</div></div>
+      <div><div class="flabel" data-i18n="fact_scope_label">Scope</div><div class="fvalue" data-i18n="fact_scope_value">Concept design</div></div>
+      <div><div class="flabel" data-i18n="fact_materials_label">Materials</div><div class="fvalue" data-i18n="case4_materials">Corten steel</div></div>
+      <div><div class="flabel" data-i18n="fact_year_label">Year</div><div class="fvalue">2022</div></div>
+    </div>
+    <div class="fab-note" data-i18n="fab_note">Concept design by Oscar Páez · Fabrication: Artesano Iron Works</div>
+
+    <div class="visual">
+      <div class="v-main"><img src="images/corten-hero.jpg" alt="Corten steel water wall installed in a corporate garden"></div>
+      <div class="v-side"><img src="images/corten-detail.jpg" alt="Concept model of the Corten steel water wall structure"></div>
+    </div>
+
+    <div class="case-body">
+      <div>
+        <h3 data-i18n="h_challenge">The challenge</h3>
+        <p data-i18n="case4_challenge">The core engineering problem sat in the manifold and reservoir: delivering perfectly even water distribution across every panel tier so the sheet fell smoothly, without splashing or dry patches, purely through calculated basin capacity and pressure head.</p>
+      </div>
+      <div>
+        <h3 data-i18n="h_did">What I did</h3>
+        <p data-i18n="case4_did">Designed the cascading Corten slat facade — a terraced profile that catches light and guides the water down — and split the structure into three transportable modules (distribution box, panel wall, reservoir basin) for straightforward installation and ongoing maintenance access.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="more">
+  <div class="wrap">
+    <div class="more-head">
+      <h2 data-i18n="more_h2">Also design</h2>
+      <p data-i18n="more_p">Concept work extends past architectural ironwork into lighting, furniture, and fine art — the same eye for form and material, applied wherever it's needed.</p>
+    </div>
+    <div class="more-grid">
+      <figure><img src="images/chandelier.jpg" alt="Armillary sphere cast bronze chandelier"></figure>
+      <figure><img src="images/gate.jpg" alt="Custom exterior fence and gate with botanical scrollwork"></figure>
+      <figure><img src="images/wood-detail.jpg" alt="Custom furniture detail in wood veneer"></figure>
+      <figure><img src="images/art-husky.jpg" alt="Fine art pastel study of a husky"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="sobre-mi">
+  <div class="wrap about-grid">
+    <div>
+      <h2 data-i18n="about_h2">How I work</h2>
+    </div>
+    <div class="about-text">
+      <p data-i18n="about_p1">Every project begins with understanding — the space, the people, and the purpose behind it — before a single line gets drawn. Good design is clear, intentional, and built to last, and every decision, structural or visual, should move toward a solution that's both elegant and buildable.</p>
+      <p data-i18n="about_p2">Most of what lands on my desk starts as one reference photo, a rough sketch, or a set of site dimensions — never a finished brief. Fifteen years of turning that kind of input into concepts a fabrication team can actually build from is the core of how I work now, whether the project is a piece of architectural ironwork or a brand identity.</p>
+      <div class="principles">
+        <div class="principle">
+          <div class="p-num">01</div>
+          <div><h4 data-i18n="p1_h">Interpret before you draw</h4><p data-i18n="p1_p">A single photo or a rough sketch is enough to start from — the first job is reading what's really being asked for.</p></div>
+        </div>
+        <div class="principle">
+          <div class="p-num">02</div>
+          <div><h4 data-i18n="p2_h">Design for the people who build it</h4><p data-i18n="p2_p">A concept only matters if a fabricator or a developer can take it and run — precision is part of the aesthetic, not separate from it.</p></div>
+        </div>
+        <div class="principle">
+          <div class="p-num">03</div>
+          <div><h4 data-i18n="p3_h">Give clients real options</h4><p data-i18n="p3_p">Three distinct, comparable proposals let a client make a confident decision instead of guessing.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <div class="wrap contact-grid">
+    <h2 data-i18n="contact_h2">Let's work on your next project.</h2>
+    <div class="contact-links">
+      <a href="mailto:os.opr.os@gmail.com">os.opr.os@gmail.com</a>
+      <a href="https://wa.me/573127902251" target="_blank" rel="noopener" data-i18n="contact_whatsapp">WhatsApp — +57 312 790 2251</a>
+      <a href="https://www.linkedin.com/in/oscar-eduardo-páez-rodríguez" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap footwrap">
+  <span data-i18n="footer_role">Oscar Páez — Concept &amp; graphic designer</span>
+  <span>Bogotá, Colombia</span>
+</div>
+
+<script>
+  const translations = {
+    en: {
+      nav_work: "Work", nav_approach: "Approach", nav_contact: "Contact",
+      hero_h1: "Design is about giving form to ideas.",
+      hero_role: "Senior concept designer with 15+ years bridging architectural vision and fabrication — custom ironwork, furniture, lighting, and brand design, built from a single reference photo through to production-ready drawings.",
+      hero_meta1_label: "Based in", hero_meta1_value: "Bogotá, Colombia — remote worldwide",
+      hero_meta2_label: "Track record", hero_meta2_value: "8 years leading concept design for a U.S. metalwork studio",
+      disclaimer_title: "A note on the metalwork projects",
+      disclaimer_text: "All architectural ironwork projects shown here were developed as concept design work for Artesano Iron Works (artesanoironworks.com). My role was limited to concept design, drafting, and visual proposals — fabrication, engineering execution, and production are proprietary to Artesano Iron Works.",
+      index_title: "Selected work",
+      case1_name: "Circular railing for a grand double staircase", case1_tag: "Residential · 2023",
+      case2_name: "Symphony in Bronze", case2_tag: "Residential · 2023",
+      case3_name: "22-foot ironwork entry system", case3_tag: "Residential · 2024",
+      case4_name: "Corten steel architectural water feature", case4_tag: "Commercial · 2022",
+      case1_title: "Circular railing for a grand double staircase",
+      case1_summary: "A custom ornamental steel railing system for a high-end residential double staircase, built from a single reference photo — precision layout across angled stair runs, intermediate landings, and curved balcony panels.",
+      case2_title: "Symphony in Bronze",
+      case2_summary: "A helical staircase railing in cast bronze, built around a tight 11'-7\" curvature — over 20 individually cast ornamental details, from acanthus motifs to scroll flowers, set against warm mahogany paneling.",
+      case3_title: "22-foot ironwork entry system",
+      case3_summary: "A monumental entry door and curved transom window wall, conceptualized to anchor a residential facade — organic scrollwork carried across three tiers, engineered to hold oversized insulated glass at full height.",
+      case4_title: "Corten steel architectural water feature",
+      case4_summary: "A monolithic water wall for a corporate headquarters garden, exploring the rich patina and organic durability of Corten steel — a louvered facade engineered to carry a continuous, even sheet of water.",
+      fact_role_label: "Role", fact_role_value: "Lead concept design",
+      fact_scope_label: "Scope", fact_scope_value: "Concept design",
+      fact_materials_label: "Materials", fact_year_label: "Year",
+      case1_materials: "Steel", case2_materials: "Cast bronze", case3_materials: "Steel & insulated glass", case4_materials: "Corten steel",
+      fab_note: "Concept design by Oscar Páez · Fabrication: Artesano Iron Works",
+      h_challenge: "The challenge", h_did: "What I did",
+      case1_challenge: "The only starting point was a single reference image. From it, the project had to interpret the existing architecture and translate intricate decorative ironwork into precise production drawings — adapting the scrollwork to the staircase's own geometry, a 32.5° diagonal run, so the pattern's rhythm stayed intact across the flat landings.",
+      case1_did: "Developed the full concept package: layout drawings for the angled runs and landings, scrollwork distribution calculated to the staircase's exact slope, and horizontal balcony panels that carry the same pattern language around the curve — balancing classical detail with the structural standards the fabrication team needed to build from.",
+      case2_challenge: "Translating neoclassical ornamentation into a multi-plane, helical structure meant developing an unfolded spiral geometry while keeping every scroll, cast leaf, and floral accent in absolute symmetry along a curve that left almost no room for error. More than 20 design revisions were needed to hold that tolerance.",
+      case2_did: "Bridged concept and fabrication directly — converting the architectural constraints into precise 2D and 3D shop drawings for the spiral and the flat balcony runs, and specifying every custom-cast bronze component so it would align exactly with the mounting hardware and the existing woodwork on site.",
+      case3_challenge: "At nearly 22 feet tall, the system needed to balance a massive vertical volume with delicate scrollwork without losing structural rhythm — dividing the facade into three proportional tiers so the entryway still reads at human scale while drawing the eye up through the glass.",
+      case3_did: "Explored four distinct design proposals for the tiering and transom curves, then produced complete CAD documentation — scroll geometries, structural tube framing, and custom glass-retention profiles engineered specifically for the oversized insulated units each tier had to carry.",
+      case4_challenge: "The core engineering problem sat in the manifold and reservoir: delivering perfectly even water distribution across every panel tier so the sheet fell smoothly, without splashing or dry patches, purely through calculated basin capacity and pressure head.",
+      case4_did: "Designed the cascading Corten slat facade — a terraced profile that catches light and guides the water down — and split the structure into three transportable modules (distribution box, panel wall, reservoir basin) for straightforward installation and ongoing maintenance access.",
+      more_h2: "Also design",
+      more_p: "Concept work extends past architectural ironwork into lighting, furniture, and fine art — the same eye for form and material, applied wherever it's needed.",
+      about_h2: "How I work",
+      about_p1: "Every project begins with understanding — the space, the people, and the purpose behind it — before a single line gets drawn. Good design is clear, intentional, and built to last, and every decision, structural or visual, should move toward a solution that's both elegant and buildable.",
+      about_p2: "Most of what lands on my desk starts as one reference photo, a rough sketch, or a set of site dimensions — never a finished brief. Fifteen years of turning that kind of input into concepts a fabrication team can actually build from is the core of how I work now, whether the project is a piece of architectural ironwork or a brand identity.",
+      p1_h: "Interpret before you draw", p1_p: "A single photo or a rough sketch is enough to start from — the first job is reading what's really being asked for.",
+      p2_h: "Design for the people who build it", p2_p: "A concept only matters if a fabricator or a developer can take it and run — precision is part of the aesthetic, not separate from it.",
+      p3_h: "Give clients real options", p3_p: "Three distinct, comparable proposals let a client make a confident decision instead of guessing.",
+      contact_h2: "Let's work on your next project.",
+      contact_whatsapp: "WhatsApp — +57 312 790 2251",
+      footer_role: "Oscar Páez — Concept & graphic designer"
+    },
+    es: {
+      nav_work: "Trabajo", nav_approach: "Enfoque", nav_contact: "Contacto",
+      hero_h1: "Diseñar es darle forma a las ideas.",
+      hero_role: "Diseñador de conceptos senior con más de 15 años uniendo visión arquitectónica y fabricación — metalistería a medida, mobiliario, iluminación e identidad de marca, partiendo de una sola foto de referencia hasta llegar a planos listos para producción.",
+      hero_meta1_label: "Con base en", hero_meta1_value: "Bogotá, Colombia — remoto en cualquier lugar",
+      hero_meta2_label: "Trayectoria", hero_meta2_value: "8 años liderando diseño de conceptos para un estudio de metalistería en EE.UU.",
+      disclaimer_title: "Una nota sobre los proyectos de metalistería",
+      disclaimer_text: "Todos los proyectos de metalistería arquitectónica que se muestran aquí fueron desarrollados como diseño conceptual para Artesano Iron Works (artesanoironworks.com). Mi función se limitó al diseño de conceptos, planos y propuestas visuales — la fabricación, ejecución técnica y producción son exclusivas de Artesano Iron Works.",
+      index_title: "Trabajo seleccionado",
+      case1_name: "Baranda circular para una escalera doble", case1_tag: "Residencial · 2023",
+      case2_name: "Sinfonía en bronce", case2_tag: "Residencial · 2023",
+      case3_name: "Sistema de entrada en hierro de 22 pies", case3_tag: "Residencial · 2024",
+      case4_name: "Muro de agua arquitectónico en acero Corten", case4_tag: "Comercial · 2022",
+      case1_title: "Baranda circular para una escalera doble",
+      case1_summary: "Un sistema de baranda ornamental en acero a medida para una escalera doble residencial de alta gama, desarrollado a partir de una sola foto de referencia — trazado de precisión en tramos angulados, descansos intermedios y paneles curvos de balcón.",
+      case2_title: "Sinfonía en bronce",
+      case2_summary: "Una baranda helicoidal en bronce fundido, construida sobre una curvatura ajustada de 11'-7\" — más de 20 detalles ornamentales fundidos de forma individual, de motivos de acanto a flores en voluta, sobre paneles de caoba cálida.",
+      case3_title: "Sistema de entrada en hierro de 22 pies",
+      case3_summary: "Una puerta de entrada monumental con muro de ventanas curvas, concebida como ancla de una fachada residencial — voluta orgánica distribuida en tres niveles, diseñada para sostener vidrio aislado de gran formato en toda su altura.",
+      case4_title: "Muro de agua arquitectónico en acero Corten",
+      case4_summary: "Un muro de agua monolítico para el jardín de una sede corporativa, que explora la pátina y la durabilidad orgánica del acero Corten — una fachada de lamas diseñada para sostener una lámina de agua continua y uniforme.",
+      fact_role_label: "Rol", fact_role_value: "Diseño de conceptos, líder",
+      fact_scope_label: "Alcance", fact_scope_value: "Diseño de conceptos",
+      fact_materials_label: "Materiales", fact_year_label: "Año",
+      case1_materials: "Acero", case2_materials: "Bronce fundido", case3_materials: "Acero y vidrio aislado", case4_materials: "Acero Corten",
+      fab_note: "Diseño conceptual de Oscar Páez · Fabricación: Artesano Iron Works",
+      h_challenge: "El reto", h_did: "Lo que hice",
+      case1_challenge: "El único punto de partida fue una sola imagen de referencia. A partir de ella hubo que interpretar la arquitectura existente y traducir una metalistería decorativa muy detallada en planos de producción precisos — adaptando la voluta a la geometría propia de la escalera, un tramo diagonal de 32.5°, para que el ritmo del patrón se mantuviera intacto en los descansos planos.",
+      case1_did: "Desarrollé el paquete completo de concepto: planos de trazado para los tramos angulados y los descansos, distribución de voluta calculada a la pendiente exacta de la escalera, y paneles horizontales de balcón que conservan el mismo lenguaje de patrón alrededor de la curva — equilibrando el detalle clásico con los estándares estructurales que el equipo de fabricación necesitaba para construir.",
+      case2_challenge: "Traducir una ornamentación neoclásica a una estructura helicoidal multiplano implicó desarrollar la geometría de la espiral desplegada, manteniendo cada voluta, hoja fundida y acento floral en simetría absoluta a lo largo de una curva que dejaba casi ningún margen de error. Se necesitaron más de 20 revisiones de diseño para sostener esa tolerancia.",
+      case2_did: "Hice de puente directo entre concepto y fabricación — convirtiendo las restricciones arquitectónicas en planos de taller 2D y 3D precisos para la espiral y los tramos planos de balcón, y especificando cada componente de bronce fundido a medida para que encajara exactamente con la herrería de montaje y la carpintería existente en obra.",
+      case3_challenge: "Con casi 22 pies de altura, el sistema debía equilibrar un volumen vertical enorme con una voluta delicada sin perder ritmo estructural — dividiendo la fachada en tres niveles proporcionales para que la entrada siguiera leyéndose a escala humana mientras la mirada sube a través del vidrio.",
+      case3_did: "Exploré cuatro propuestas de diseño distintas para los niveles y las curvas del travesaño, y luego produje la documentación CAD completa — geometrías de voluta, estructura tubular y perfiles de retención de vidrio diseñados específicamente para las unidades aisladas de gran formato que cada nivel debía sostener.",
+      case4_challenge: "El reto de ingeniería central estaba en el colector y el depósito: lograr una distribución de agua perfectamente uniforme en cada nivel de paneles para que la lámina cayera con suavidad, sin salpicaduras ni zonas secas, únicamente mediante el cálculo de la capacidad del depósito y la presión.",
+      case4_did: "Diseñé la fachada escalonada de lamas en Corten — un perfil terraceado que atrapa la luz y guía el agua hacia abajo — y dividí la estructura en tres módulos transportables (caja de distribución, muro de paneles y depósito) para una instalación sencilla y acceso de mantenimiento continuo.",
+      more_h2: "También diseño",
+      more_p: "El trabajo de concepto va más allá de la metalistería arquitectónica hacia iluminación, mobiliario y arte — la misma mirada por la forma y el material, aplicada donde se necesite.",
+      about_h2: "Cómo trabajo",
+      about_p1: "Todo proyecto empieza por entender — el espacio, las personas y el propósito detrás — antes de trazar una sola línea. El buen diseño es claro, intencional y hecho para durar, y cada decisión, estructural o visual, debe acercarse a una solución que sea elegante y construible a la vez.",
+      about_p2: "La mayoría de lo que llega a mi escritorio empieza como una foto de referencia, un boceto rápido o un conjunto de medidas de obra — nunca un brief terminado. Quince años convirtiendo ese tipo de insumo en conceptos que un equipo de fabricación pueda realmente construir es el centro de cómo trabajo hoy, ya sea una pieza de metalistería arquitectónica o una identidad de marca.",
+      p1_h: "Interpretar antes de dibujar", p1_p: "Una sola foto o un boceto rápido bastan para empezar — el primer trabajo es leer lo que realmente se está pidiendo.",
+      p2_h: "Diseñar para quien lo construye", p2_p: "Un concepto solo importa si un fabricante o un desarrollador puede tomarlo y avanzar — la precisión es parte de la estética, no algo aparte.",
+      p3_h: "Dar opciones reales al cliente", p3_p: "Tres propuestas distintas y comparables le permiten al cliente decidir con confianza en vez de adivinar.",
+      contact_h2: "Trabajemos en tu próximo proyecto.",
+      contact_whatsapp: "WhatsApp — +57 312 790 2251",
+      footer_role: "Oscar Páez — Diseñador de conceptos y gráfico"
+    }
+  };
+
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key] !== undefined) el.innerHTML = translations[lang][key];
+    });
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    document.getElementById('lang-es').classList.toggle('active', lang === 'es');
+  }
+  document.getElementById('lang-en').addEventListener('click', () => setLang('en'));
+  document.getElementById('lang-es').addEventListener('click', () => setLang('es'));
+
+  const links = document.querySelectorAll('#mainnav a[href^="#"]');
+  const sections = ['#trabajo', '#sobre-mi', '#contacto'].map(id => document.querySelector(id));
+  const setActive = () => {
+    let current = links[0];
+    sections.forEach((sec, i) => {
+      if (sec && sec.getBoundingClientRect().top < 120) current = links[i];
+    });
+    links.forEach(l => l.classList.toggle('active', l === current));
+  };
+  document.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+</script>
+
+</body>
+</html>
